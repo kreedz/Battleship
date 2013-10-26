@@ -1,6 +1,6 @@
-$().ready(function() {
+п»ї$().ready(function() {
 
-	// существуют ли нетронутые палубы (true)
+	// СЃСѓС‰РµСЃС‚РІСѓСЋС‚ Р»Рё РЅРµС‚СЂРѕРЅСѓС‚С‹Рµ РїР°Р»СѓР±С‹ (true)
 	function isShipsLife(a, n) {
 		flag = false;
 		for (var i = 0; i < n; ++i)
@@ -9,37 +9,37 @@ $().ready(function() {
 		return flag;
 	}
 
-	// проверка на потопленность корабля
-	// закрашиваем ячейки карты
+	// РїСЂРѕРІРµСЂРєР° РЅР° РїРѕС‚РѕРїР»РµРЅРЅРѕСЃС‚СЊ РєРѕСЂР°Р±Р»СЏ
+	// Р·Р°РєСЂР°С€РёРІР°РµРј СЏС‡РµР№РєРё РєР°СЂС‚С‹
 	function isShipDead(a, td, whoCell, i, j, n) {
-		// палуба корабля:
-		// живая
-		var SHIP_LIVE = 1
-		// повреждённая
-		var SHIP_HIT = 2
-		// потопленная
-		var SHIP_DEAD = 3
-		// произведён выстрел, но не был попадания
-		var NOT_HIT = 4;
+		// РїР°Р»СѓР±Р° РєРѕСЂР°Р±Р»СЏ:
+		// Р¶РёРІР°СЏ
+		var SHIP_LIVE = 1,
+			// РїРѕРІСЂРµР¶РґС‘РЅРЅР°СЏ
+			SHIP_HIT = 2,
+			// РїРѕС‚РѕРїР»РµРЅРЅР°СЏ
+			SHIP_DEAD = 3,
+			// РїСЂРѕРёР·РІРµРґС‘РЅ РІС‹СЃС‚СЂРµР», РЅРѕ РЅРµ Р±С‹Р» РїРѕРїР°РґР°РЅРёСЏ
+			NOT_HIT = 4;
 	
-		// если стрелям по тем местам, куда уже стреляли
+		// РµСЃР»Рё СЃС‚СЂРµР»СЏРј РїРѕ С‚РµРј РјРµСЃС‚Р°Рј, РєСѓРґР° СѓР¶Рµ СЃС‚СЂРµР»СЏР»Рё
 		if (a[i][j] == NOT_HIT) return true;
 		
-		// если мимо
+		// РµСЃР»Рё РјРёРјРѕ
 		if (a[i][j] == 0) {
 			a[i][j] = NOT_HIT;
 			td.css('background-image', 'url(1.gif)');
 			return false;
-		}	
+		}
 	
-		// корабль ранили
+		// РєРѕСЂР°Р±Р»СЊ СЂР°РЅРёР»Рё
 		if (a[i][j] == SHIP_LIVE) {
 			a[i][j] = SHIP_HIT;
-			td.css('background', 'red'); 
+			td.css('background', 'red');
 		}
 		
-		// проверим однопалубный это корабль или нет	
-		// определяем поля вокруг корабля
+		// РїСЂРѕРІРµСЂРёРј РѕРґРЅРѕРїР°Р»СѓР±РЅС‹Р№ СЌС‚Рѕ РєРѕСЂР°Р±Р»СЊ РёР»Рё РЅРµС‚
+		// РѕРїСЂРµРґРµР»СЏРµРј РїРѕР»СЏ РІРѕРєСЂСѓРі РєРѕСЂР°Р±Р»СЏ
 		var topSide = 0;
 		if (i) topSide = a[i - 1][j];
 		
@@ -52,17 +52,17 @@ $().ready(function() {
 		var rightSide = 0;
 		if (j + 1 < n) rightSide = a[i][j + 1];
 		
-		// если убит
+		// РµСЃР»Рё СѓР±РёС‚
 		if (!topSide && !bottomSide && !leftSide && !rightSide) {
 			a[i][j] = SHIP_DEAD;
-			td.css('background', 'grey'); 
+			td.css('background', 'grey');
 			return true;
-		}	
+		}
 
 		
-		// проверка многопалубного корабля
-		// поиск начала корабля
-		// ищем вверх
+		// РїСЂРѕРІРµСЂРєР° РјРЅРѕРіРѕРїР°Р»СѓР±РЅРѕРіРѕ РєРѕСЂР°Р±Р»СЏ
+		// РїРѕРёСЃРє РЅР°С‡Р°Р»Р° РєРѕСЂР°Р±Р»СЏ
+		// РёС‰РµРј РІРІРµСЂС…
 		var iBegin = i, jBegin = j, xBegin = i, yBegin = j, xEnd, yEnd;
 		while (a[iBegin][jBegin] != 0) {
 			if (a[iBegin][jBegin] == NOT_HIT) break;
@@ -71,7 +71,7 @@ $().ready(function() {
 			--iBegin;
 		}
 		
-		// ищем влево
+		// РёС‰РµРј РІР»РµРІРѕ
 		iBegin = i, jBegin = j;
 		while (a[iBegin][jBegin] != 0) {
 			if (a[iBegin][jBegin] == NOT_HIT) break;
@@ -80,8 +80,8 @@ $().ready(function() {
 			--jBegin;
 		}
 		
-		// поиск конца корабля
-		// ищем вниз
+		// РїРѕРёСЃРє РєРѕРЅС†Р° РєРѕСЂР°Р±Р»СЏ
+		// РёС‰РµРј РІРЅРёР·
 		iEnd = i, jEnd = j, xEnd = i;
 		while (a[iEnd][jEnd] != 0) {
 			if (a[iEnd][jEnd] == NOT_HIT) break;
@@ -90,7 +90,7 @@ $().ready(function() {
 			++iEnd;
 		}		
 		
-		// ищем вправо
+		// РёС‰РµРј РІРїСЂР°РІРѕ
 		iEnd = i, jEnd = j, yEnd = j;
 		while (a[iEnd][jEnd] != 0) {
 			if (a[iEnd][jEnd] == NOT_HIT) break;
@@ -99,7 +99,7 @@ $().ready(function() {
 			++jEnd;
 		}		
 		
-		// считаем раненые палубы корабля
+		// СЃС‡РёС‚Р°РµРј СЂР°РЅРµРЅС‹Рµ РїР°Р»СѓР±С‹ РєРѕСЂР°Р±Р»СЏ
 		var countHeat = 0, shipLen = 0;
 		if (yBegin == yEnd) {
 			shipLen = xEnd - xBegin + 1;
@@ -113,38 +113,38 @@ $().ready(function() {
 					++countHeat;
 		}
 		
-		// если все палубы ранены, то корабль мёртв
-		// внесём изменения в массив и в карту
+		// РµСЃР»Рё РІСЃРµ РїР°Р»СѓР±С‹ СЂР°РЅРµРЅС‹, С‚Рѕ РєРѕСЂР°Р±Р»СЊ РјС‘СЂС‚РІ
+		// РІРЅРµСЃС‘Рј РёР·РјРµРЅРµРЅРёСЏ РІ РјР°СЃСЃРёРІ Рё РІ РєР°СЂС‚Сѓ
 		if (shipLen == countHeat) {
 			if (yBegin == yEnd) {
 				for (var k = xBegin; k <= xEnd; ++k) {
 					a[k][j] = SHIP_DEAD;
-					td = $(document.getElementById(whoCell + k + '' + j)); 
-					td.css('background', 'grey'); 
+					td = $(document.getElementById(whoCell + k + '' + j));
+					td.css('background', 'grey');
 				}
 				return true;
 			} else {
-				for (var k = yBegin; k <= yEnd; ++k) {
+				for (var k = yBegin; k <= yEnd; ++k){
 					a[i][k] = SHIP_DEAD;
-					td = $(document.getElementById(whoCell + i + '' + k)); 
-					td.css('background', 'grey'); 
-				}		
+					td = $(document.getElementById(whoCell + i + '' + k));
+					td.css('background', 'grey');
+				}
 				return true;
-			}			
+			}
 		}
 		
-		// если ранен
+		// РµСЃР»Рё СЂР°РЅРµРЅ
 		if (a[i][j] == SHIP_HIT) return true;
 		
 	}
 	
 	function getRandAndFreeField(ships) {
-		var manShips = ships
-		var i, j;
+		var manShips = ships,
+			i, j;
 		while (true) {
-			var x = Math.floor(Math.random() * n);
-			var y= Math.floor(Math.random() * n);
-			// если выбранная координата не раненая палуба и не убитый корабль и не координата, в которую стреляли ранее
+			var x = Math.floor(Math.random() * n),
+				y = Math.floor(Math.random() * n);
+			// РµСЃР»Рё РІС‹Р±СЂР°РЅРЅР°СЏ РєРѕРѕСЂРґРёРЅР°С‚Р° РЅРµ СЂР°РЅРµРЅР°СЏ РїР°Р»СѓР±Р° Рё РЅРµ СѓР±РёС‚С‹Р№ РєРѕСЂР°Р±Р»СЊ Рё РЅРµ РєРѕРѕСЂРґРёРЅР°С‚Р°, РІ РєРѕС‚РѕСЂСѓСЋ СЃС‚СЂРµР»СЏР»Рё СЂР°РЅРµРµ
 			if (manShips[0][x][y] != 2 && manShips[0][x][y] != 3 && manShips[0][x][y] != 4) {
 				i = x;
 				j = y;
@@ -156,9 +156,9 @@ $().ready(function() {
 	}
 	
 	function compStep(ships) {
-		var t = getRandAndFreeField(manShips);
-		var i = t[0];
-		var j = t[1];
+		var t = getRandAndFreeField(manShips),
+			i = t[0],
+			j = t[1];
 		td = $(document.getElementById('cellMan' + i + '' + j));
 
 		while (isShipDead(manShips[0], td, "cellMan", i, j, n)) {
@@ -166,21 +166,21 @@ $().ready(function() {
 			i = t[0];
 			j = t[1];
 			td = $(document.getElementById('cellMan' + i + '' + j));
-		};	
+		};
 	}
 	
 	function getParam(a) {
-        get = a;
-        l = get.length;
-        x = get.indexOf('?');
-        get = get.substr(x + 5, l - x + 5);
-		if (get == '') get = "Человек";
-        return get;
+		get = a;
+		l = get.length;
+		x = get.indexOf('?');
+		get = get.substr(x + 5, l - x + 5);
+		if (get == '') get = "Р§РµР»РѕРІРµРє";
+		return get;
 }
 
-	var log = new Array(10);
+	var log = new Array(10),
+		global = 0;
 	init(log, 10);
-	var global = 0;
 	
 	function init(a, n) {
 		for (var i = 0; i < n; ++i) {
@@ -190,32 +190,32 @@ $().ready(function() {
 		}
 	}
 
-	// поворот против (k = 1), по (k = 0)
+	// РїРѕРІРѕСЂРѕС‚ РїСЂРѕС‚РёРІ (k = 1), РїРѕ (k = 0)
 	function rotate(a, n, k) {
-        var c = new Array(n);
-        init(c, n);     
+		var c = new Array(n);
+		init(c, n);
 		if (k)
-			// против
+			// РїСЂРѕС‚РёРІ
 			for (var i = 0; i < n; ++i)
 				for (var j = 0; j < n; ++j)
-					c[i][j] = a[j][n - i - 1];        
+					c[i][j] = a[j][n - i - 1];
 		else
-			// по
+			// РїРѕ
 			for (var i = 0; i < n; ++i)
 				for (var j = 0; j < n; ++j)
-					c[i][j] = a[n - j - 1][i];		
-        return c;
+					c[i][j] = a[n - j - 1][i];
+		return c;
 	}
  
 	
-	function insertShipInMap(ship, full, vertical, i, n, isRotate) {	
+	function insertShipInMap(ship, full, vertical, i, n, isRotate) {
 		ship[i][vertical] = 1;
 		full[i][vertical] = 1;
-		// запретные зоны для строительства вокруг корабля
-		// если корабль не у левого края, то
+		// Р·Р°РїСЂРµС‚РЅС‹Рµ Р·РѕРЅС‹ РґР»СЏ СЃС‚СЂРѕРёС‚РµР»СЊСЃС‚РІР° РІРѕРєСЂСѓРі РєРѕСЂР°Р±Р»СЏ
+		// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РЅРµ Сѓ Р»РµРІРѕРіРѕ РєСЂР°СЏ, С‚Рѕ
 		if (vertical)
 			full[i][vertical - 1] = 1;
-		// если корабль не у правого края, то
+		// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РЅРµ Сѓ РїСЂР°РІРѕРіРѕ РєСЂР°СЏ, С‚Рѕ
 		if (vertical != n - 1)
 			full[i][vertical + 1] = 1;
 	}	
@@ -227,12 +227,12 @@ $().ready(function() {
 		if (isFree) {	
 			var marker = false;
 			
-			// для однопалубных
+			// РґР»СЏ РѕРґРЅРѕРїР°Р»СѓР±РЅС‹С…
 			if (k > 5) 
 				marker = true;
-			// для остальных требуется проверка
+			// РґР»СЏ РѕСЃС‚Р°Р»СЊРЅС‹С… С‚СЂРµР±СѓРµС‚СЃСЏ РїСЂРѕРІРµСЂРєР°
 			else {
-				// определям углы
+				// РѕРїСЂРµРґРµР»СЏРј СѓРіР»С‹
 				var leftUpCorner = 0;
 				if (vertical && begin) leftUpCorner = full[begin - 1][vertical - 1];
 				
@@ -245,95 +245,95 @@ $().ready(function() {
 				var rightDownCorner = 0;
 				if ((vertical != n - 1) && (begin + count[k] - 1 != n - 1)) rightDownCorner = full[begin + count[k]][vertical + 1];
 				
-				// определяем поля за и перед кораблём
+				// РѕРїСЂРµРґРµР»СЏРµРј РїРѕР»СЏ Р·Р° Рё РїРµСЂРµРґ РєРѕСЂР°Р±Р»С‘Рј
 				var topSide = 0;
 				if (begin) topSide = full[begin - 1][vertical];
 				
 				var bottomSide = 0;
 				if (begin + count[k] - 1 != n - 1) bottomSide = full[begin + count[k]][vertical];
 				
-				// если углы корабля не в запретной зоне для строительства:
-				// если корабль у левого края и два правых угла (верхний и нижний) и две стороны за кораблём (верх. и нижн.) свободны, то
+				// РµСЃР»Рё СѓРіР»С‹ РєРѕСЂР°Р±Р»СЏ РЅРµ РІ Р·Р°РїСЂРµС‚РЅРѕР№ Р·РѕРЅРµ РґР»СЏ СЃС‚СЂРѕРёС‚РµР»СЊСЃС‚РІР°:
+				// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ Сѓ Р»РµРІРѕРіРѕ РєСЂР°СЏ Рё РґРІР° РїСЂР°РІС‹С… СѓРіР»Р° (РІРµСЂС…РЅРёР№ Рё РЅРёР¶РЅРёР№) Рё РґРІРµ СЃС‚РѕСЂРѕРЅС‹ Р·Р° РєРѕСЂР°Р±Р»С‘Рј (РІРµСЂС…. Рё РЅРёР¶РЅ.) СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!rightUpCorner && !rightDownCorner && !topSide && !bottomSide
 				) marker = true;
-				// если у правого края и два левых угла (верхний и нижний) и две стороны за кораблём (верх. и нижн.) свободны, то
+				// РµСЃР»Рё Сѓ РїСЂР°РІРѕРіРѕ РєСЂР°СЏ Рё РґРІР° Р»РµРІС‹С… СѓРіР»Р° (РІРµСЂС…РЅРёР№ Рё РЅРёР¶РЅРёР№) Рё РґРІРµ СЃС‚РѕСЂРѕРЅС‹ Р·Р° РєРѕСЂР°Р±Р»С‘Рј (РІРµСЂС…. Рё РЅРёР¶РЅ.) СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && (vertical == (n - 1)) && begin && (begin + count[k] - 1 != n - 1)
 					&& !leftUpCorner && !leftDownCorner
 					&& !topSide && !bottomSide
 				) marker = true;
-				// если у верха и два нижних угла и нижн. поле за кораблём свободны, то
+				// РµСЃР»Рё Сѓ РІРµСЂС…Р° Рё РґРІР° РЅРёР¶РЅРёС… СѓРіР»Р° Рё РЅРёР¶РЅ. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && !begin 
 					&& !leftDownCorner
 					&& !rightDownCorner
 					&& !bottomSide
 				) marker = true;
-				// если у низа и два верхних угла и верх. поле за кораблём свободны, то
+				// РµСЃР»Рё Сѓ РЅРёР·Р° Рё РґРІР° РІРµСЂС…РЅРёС… СѓРіР»Р° Рё РІРµСЂС…. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && (begin + count[k] - 1) == (n - 1) 
 					&& !leftUpCorner 
 					&& !rightUpCorner
 					&& !topSide
 				) marker = true;
-				// если корабль в верхнем левом углу и правый нижний угол и нижн. поле за кораблём свободны, то
+				// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РІ РІРµСЂС…РЅРµРј Р»РµРІРѕРј СѓРіР»Сѓ Рё РїСЂР°РІС‹Р№ РЅРёР¶РЅРёР№ СѓРіРѕР» Рё РЅРёР¶РЅ. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && !begin && !vertical 
 					&& !rightDownCorner
 					&& !bottomSide
 				) marker = true;
-				// если в верхнем правом углу и левый нижний угол и нижн. поле за кораблём свободны, то
+				// РµСЃР»Рё РІ РІРµСЂС…РЅРµРј РїСЂР°РІРѕРј СѓРіР»Сѓ Рё Р»РµРІС‹Р№ РЅРёР¶РЅРёР№ СѓРіРѕР» Рё РЅРёР¶РЅ. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && !begin && (vertical == n - 1) 
 					&& !leftDownCorner
 					&& !bottomSide
 				) marker = true;
-				// если в нижнем левом углу и правый верхний угол и верхн. поле за кораблём свободны, то
+				// РµСЃР»Рё РІ РЅРёР¶РЅРµРј Р»РµРІРѕРј СѓРіР»Сѓ Рё РїСЂР°РІС‹Р№ РІРµСЂС…РЅРёР№ СѓРіРѕР» Рё РІРµСЂС…РЅ. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && (begin + count[k] - 1 == n - 1) && !vertical
 					&& !rightUpCorner
 					&& !topSide
 				) marker = true;
-				// если в нижнем правом углу и левый верхний угол и верхн. поле за кораблём свободны, то
+				// РµСЃР»Рё РІ РЅРёР¶РЅРµРј РїСЂР°РІРѕРј СѓРіР»Сѓ Рё Р»РµРІС‹Р№ РІРµСЂС…РЅРёР№ СѓРіРѕР» Рё РІРµСЂС…РЅ. РїРѕР»Рµ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && (begin + count[k] - 1 == n - 1) && (vertical == n - 1) 
 					&& !leftUpCorner
 					&& !topSide
 				) marker = true;
-				// если корабль не касается ни одного края карты и все четыре угла и верхн. и нижн. поля за кораблём свободны, то
+				// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РЅРµ РєР°СЃР°РµС‚СЃСЏ РЅРё РѕРґРЅРѕРіРѕ РєСЂР°СЏ РєР°СЂС‚С‹ Рё РІСЃРµ С‡РµС‚С‹СЂРµ СѓРіР»Р° Рё РІРµСЂС…РЅ. Рё РЅРёР¶РЅ. РїРѕР»СЏ Р·Р° РєРѕСЂР°Р±Р»С‘Рј СЃРІРѕР±РѕРґРЅС‹, С‚Рѕ
 				if (
 					!marker && begin && vertical && (begin + count[k] - 1 != n - 1) && (vertical != n - 1)
 					&& !leftUpCorner && !rightUpCorner && !leftUpCorner
 					&& !leftDownCorner
 					&& !topSide
 					&& !bottomSide
-				) marker = true;		
+				) marker = true;
 			}
 			
 			if (marker) {
-				if (isFree) {							
+				if (isFree) {
 					for (var j = begin; j < count[k] + begin; ++j)
 						insertShipInMap(ship, full, vertical, j, n, isRotate);
 						
-					// запретные зоны для строительства вокруг корабля:
-					// если корабль не у верха, то
+					// Р·Р°РїСЂРµС‚РЅС‹Рµ Р·РѕРЅС‹ РґР»СЏ СЃС‚СЂРѕРёС‚РµР»СЊСЃС‚РІР° РІРѕРєСЂСѓРі РєРѕСЂР°Р±Р»СЏ:
+					// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РЅРµ Сѓ РІРµСЂС…Р°, С‚Рѕ
 					if (begin)
 						full[begin - 1][vertical] = 1;
-					// если корабль не у низа, то
+					// РµСЃР»Рё РєРѕСЂР°Р±Р»СЊ РЅРµ Сѓ РЅРёР·Р°, С‚Рѕ
 					if ((count[k] + begin - 1) != (n - 1))
 						full[count[k] + begin][vertical] = 1;
 						
-					// если не у левого края и не у верха, то
+					// РµСЃР»Рё РЅРµ Сѓ Р»РµРІРѕРіРѕ РєСЂР°СЏ Рё РЅРµ Сѓ РІРµСЂС…Р°, С‚Рѕ
 					if (vertical && begin)
 						full[begin - 1][vertical - 1] = 1;
-					// если не у правого края и не у верха, то
+					// РµСЃР»Рё РЅРµ Сѓ РїСЂР°РІРѕРіРѕ РєСЂР°СЏ Рё РЅРµ Сѓ РІРµСЂС…Р°, С‚Рѕ
 					if (vertical != (n - 1) && begin)
 						full[begin - 1][vertical + 1] = 1;
-					// если не у левого края и не у низа, то
+					// РµСЃР»Рё РЅРµ Сѓ Р»РµРІРѕРіРѕ РєСЂР°СЏ Рё РЅРµ Сѓ РЅРёР·Р°, С‚Рѕ
 					if (vertical && ((begin + count[k] - 1) != (n - 1)))
 						full[begin + count[k]][vertical - 1] = 1;
-					// если не у правого края и не у низа, то
+					// РµСЃР»Рё РЅРµ Сѓ РїСЂР°РІРѕРіРѕ РєСЂР°СЏ Рё РЅРµ Сѓ РЅРёР·Р°, С‚Рѕ
 					if ((vertical != (n - 1)) && ((begin + count[k] - 1) != (n - 1)))
 						full[begin + count[k]][vertical + 1] = 1;
 					//++k[0];
@@ -346,55 +346,53 @@ $().ready(function() {
 	}	
 	 
 	function createShipMap(ship1, full1) {
-			// палубы кораблей
-			 var count = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 0];
-			// итератор для прохода по массиву count
-			 var k = [0];
-			 // флаг: исходная матрица (0) или повёрнутая (1)
-			 var isRotate = false;
-			 
-			 // инициализируем нулями созданные карты
+			// РїР°Р»СѓР±С‹ РєРѕСЂР°Р±Р»РµР№
+			var count = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 0],
+				// РёС‚РµСЂР°С‚РѕСЂ РґР»СЏ РїСЂРѕС…РѕРґР° РїРѕ РјР°СЃСЃРёРІСѓ count
+				k = [0],
+				// С„Р»Р°Рі: РёСЃС…РѕРґРЅР°СЏ РјР°С‚СЂРёС†Р° (0) РёР»Рё РїРѕРІС‘СЂРЅСѓС‚Р°СЏ (1)
+				isRotate = false;
+			
+			// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РЅСѓР»СЏРјРё СЃРѕР·РґР°РЅРЅС‹Рµ РєР°СЂС‚С‹
 			init(ship1, n);
 			init(full1, n);
 			
 			while (count[k]) {
-				// выбрать случайно вид корабля: горизонтальный (0) или вертикальный (1)
-				 var position = Math.floor(Math.random() * 2);
-				 // var position = 0;
-				 var horizontal = -1;
-				 var vertical = -1;
+				// РІС‹Р±СЂР°С‚СЊ СЃР»СѓС‡Р°Р№РЅРѕ РІРёРґ РєРѕСЂР°Р±Р»СЏ: РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ (0) РёР»Рё РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ (1)
+				var position = Math.floor(Math.random() * 2),
+					horizontal = -1,
+					vertical = -1;
 				
 				if (position) 
 					vertical = Math.floor(Math.random() * n);
 				else
 					horizontal = Math.floor(Math.random() * n);
 				
-				var endOfBegin = n - count[k];
+				var endOfBegin = n - count[k],
+					begin = Math.floor(Math.random() * (endOfBegin + 1)),
+					isBuild = 0;
 
-				var begin = Math.floor(Math.random() * (endOfBegin + 1));
-				var isBuild = 0;
-
-				// поиск места сверху вниз для постройки count[k]-палубного корабля
+				// РїРѕРёСЃРє РјРµСЃС‚Р° СЃРІРµСЂС…Сѓ РІРЅРёР· РґР»СЏ РїРѕСЃС‚СЂРѕР№РєРё count[k]-РїР°Р»СѓР±РЅРѕРіРѕ РєРѕСЂР°Р±Р»СЏ
 				for (var i = begin; i <= endOfBegin; ++i) {
-					// если вертикальный корабль
-					if (position) {		
+					// РµСЃР»Рё РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ РєРѕСЂР°Р±Р»СЊ
+					if (position) {
 						if (isRotate) {
 							ship1 = rotate(ship1, n, isRotate);
 							full1 = rotate(full1, n, isRotate);
-							isRotate = !isRotate;							
+							isRotate = !isRotate;
 						}
 						if (isFreeFields(ship1, full1, count, k, begin, vertical, i, n, isRotate)) {
 							++k[0];
 							break;
 						}
-					// если горизонтальный корабль
+					// РµСЃР»Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ РєРѕСЂР°Р±Р»СЊ
 					} else {
-						//повернуть все матрицы и вызвать функцию, в которой будет предыдущий блок кода
+						//РїРѕРІРµСЂРЅСѓС‚СЊ РІСЃРµ РјР°С‚СЂРёС†С‹ Рё РІС‹Р·РІР°С‚СЊ С„СѓРЅРєС†РёСЋ, РІ РєРѕС‚РѕСЂРѕР№ Р±СѓРґРµС‚ РїСЂРµРґС‹РґСѓС‰РёР№ Р±Р»РѕРє РєРѕРґР°
 						if (!isRotate) {
 							ship1 = rotate(ship1, n, isRotate);
 							full1 = rotate(full1, n, isRotate);
-							isRotate = !isRotate;							
-						}					
+							isRotate = !isRotate;
+						}
 						if (isFreeFields(ship1, full1, count, k, begin, horizontal, i, n, isRotate)) {
 							++k[0];
 							break;
@@ -404,28 +402,27 @@ $().ready(function() {
 			}
 		return [ship1, full1];
 	}
-	 
-	 
-	 // размерность карты
-	 var n = 10;
-	 // карта кораблей игрока и компьютера
-	 var ship1 = new Array(n);
-	 var ship2 = new Array(n);
-	 // карта недоступных мест для создания кораблей игрока и компьютера
-	 var full1 = new Array(n);
-	 var full2 = new Array(n);	 
-	 
-	// создаём корабли для игрока и компьютера
-	var manShips = createShipMap(ship1, full1);
-	var compShips = createShipMap(ship2, full2);
 	
-	// получаем параметр и встраиваем его в HTML-код
+	// СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєР°СЂС‚С‹
+	var n = 10,
+		// РєР°СЂС‚Р° РєРѕСЂР°Р±Р»РµР№ РёРіСЂРѕРєР° Рё РєРѕРјРїСЊСЋС‚РµСЂР°
+		ship1 = new Array(n),
+		ship2 = new Array(n),
+		// РєР°СЂС‚Р° РЅРµРґРѕСЃС‚СѓРїРЅС‹С… РјРµСЃС‚ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РєРѕСЂР°Р±Р»РµР№ РёРіСЂРѕРєР° Рё РєРѕРјРїСЊСЋС‚РµСЂР°
+		full1 = new Array(n),
+		full2 = new Array(n);
+	 
+	// СЃРѕР·РґР°С‘Рј РєРѕСЂР°Р±Р»Рё РґР»СЏ РёРіСЂРѕРєР° Рё РєРѕРјРїСЊСЋС‚РµСЂР°
+	var manShips = createShipMap(ship1, full1),
+		compShips = createShipMap(ship2, full2);
+	
+	// РїРѕР»СѓС‡Р°РµРј РїР°СЂР°РјРµС‚СЂ Рё РІСЃС‚СЂР°РёРІР°РµРј РµРіРѕ РІ HTML-РєРѕРґ
 	s = window.location.href;
 	s = getParam(s);
 	s = decodeURI(s);
 	document.getElementById('manName').innerHTML = s;
 	
-	// показываем корабли человека
+	// РїРѕРєР°Р·С‹РІР°РµРј РєРѕСЂР°Р±Р»Рё С‡РµР»РѕРІРµРєР°
 	for (var i = 0; i < n; ++i) 
 		for (var j = 0; j < n; ++j)
 			if (manShips[0][i][j] == 1) {
@@ -433,45 +430,43 @@ $().ready(function() {
 				td.css('background', 'green'); 
 			}
 	
-	// существуют ли нетронутые палубы
-	var shipManLife = isShipsLife(manShips[0], n), shipCompLife = isShipsLife(compShips[0], n);
-	
-	// первый ход совершат случайная сторона, 1 - человек, 0 - компьютер
-	var whoFirst = Math.floor(Math.random() * 2);
+	// СЃСѓС‰РµСЃС‚РІСѓСЋС‚ Р»Рё РЅРµС‚СЂРѕРЅСѓС‚С‹Рµ РїР°Р»СѓР±С‹
+	var shipManLife = isShipsLife(manShips[0], n),
+		shipCompLife = isShipsLife(compShips[0], n),
+		// РїРµСЂРІС‹Р№ С…РѕРґ СЃРѕРІРµСЂС€Р°С‚ СЃР»СѓС‡Р°Р№РЅР°СЏ СЃС‚РѕСЂРѕРЅР°, 1 - С‡РµР»РѕРІРµРє, 0 - РєРѕРјРїСЊСЋС‚РµСЂ
+		whoFirst = Math.floor(Math.random() * 2);
 	if (!whoFirst) compStep(compShips[0]);
 	
-	// выстрелы по карте игроком и компьютером
-	// изменения в карте и в массиве координат кораблей
+	// РІС‹СЃС‚СЂРµР»С‹ РїРѕ РєР°СЂС‚Рµ РёРіСЂРѕРєРѕРј Рё РєРѕРјРїСЊСЋС‚РµСЂРѕРј
+	// РёР·РјРµРЅРµРЅРёСЏ РІ РєР°СЂС‚Рµ Рё РІ РјР°СЃСЃРёРІРµ РєРѕРѕСЂРґРёРЅР°С‚ РєРѕСЂР°Р±Р»РµР№
 	var cellCompClass = '.tcellComp';
-	$(cellCompClass).click(function(e) { 		
-		var td = $(e.target);
+	$(cellCompClass).click(function(e) {
+		var td = $(e.target),
+			// РІС‹С‚Р°С‰РёРј С‡РёСЃР»Рѕ СЏС‡РµР№РєРё
+			regExp = /(\d+)$/g,
+			arrExp = regExp.exec(td.attr('id')),
+			idTd = arrExp[1];
 		
-		// вытащим число ячейки
-		var regExp = /(\d+)$/g;
-		var arrExp = regExp.exec(td.attr('id'));
-		var idTd = arrExp[1];
-		
-		// если есть нетронутые корабли
+		// РµСЃР»Рё РµСЃС‚СЊ РЅРµС‚СЂРѕРЅСѓС‚С‹Рµ РєРѕСЂР°Р±Р»Рё
 		if (shipManLife && shipCompLife) {
-			var i = parseInt(idTd[0], 10);
-			var j = parseInt(idTd[1], 10);
+			var i = parseInt(idTd[0], 10),
+				j = parseInt(idTd[1], 10);
 			
-			// меняем цвет палуб на карте и данные в массиве
-			// запрещаем нажатие на карте компьютера если был промах
+			// РјРµРЅСЏРµРј С†РІРµС‚ РїР°Р»СѓР± РЅР° РєР°СЂС‚Рµ Рё РґР°РЅРЅС‹Рµ РІ РјР°СЃСЃРёРІРµ
+			// Р·Р°РїСЂРµС‰Р°РµРј РЅР°Р¶Р°С‚РёРµ РЅР° РєР°СЂС‚Рµ РєРѕРјРїСЊСЋС‚РµСЂР° РµСЃР»Рё Р±С‹Р» РїСЂРѕРјР°С…
 			if (! isShipDead(compShips[0], td, "cellComp", i, j, n)) {
 				cellCompClass = '';
-				// ответные действия компьютера
+				// РѕС‚РІРµС‚РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ РєРѕРјРїСЊСЋС‚РµСЂР°
 				compStep(compShips[0]);
 				cellCompClass = '.tcellComp';
 			}
 		
 			shipManLife = isShipsLife(manShips[0], n);
 			shipCompLife = isShipsLife(compShips[0], n);
-		} else 
+		} else
 			if (shipManLife)
-				alert(s + " выйграл!");
+				alert(s + " РІС‹РёРіСЂР°Р»!");
 			else
-				alert("Компьютер выйграл!")
-					
-	});				
+				alert("РљРѕРјРїСЊСЋС‚РµСЂ РІС‹РёРіСЂР°Р»!")
+	});
 });
