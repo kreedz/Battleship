@@ -1,0 +1,98 @@
+body {
+	background-image: url('ship1.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#center {
+	top: 50%;
+	left: 50%;
+	width: 800px;
+	height: 400px;
+	position: absolute;
+	margin-left: -400px;
+	margin-top: -200px;
+	border: 1px solid black;
+	background: white;
+	opacity: 0.7;
+}
+
+#head {
+	height: 60px;
+	padding: 20px;
+}
+
+#manName {
+	width: 290px;
+	padding: 5px;
+	font-size: 14pt;
+	font-family: monospace;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+}
+
+#compName {
+	width: 290px;
+	padding: 5px;
+	font-size: 14pt;
+	font-family: monospace;
+	text-align: center;
+	border: 1px solid black;
+	float: right;
+}
+
+#whoStep {
+	margin-top: -10px;
+	height: 40px;
+	font-size: 18pt;
+	font-family: monospace;
+	text-align: center;
+	#border: 1px solid black;
+}
+
+
+#tableMan {
+	padding-top: 0px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	float: left;
+	#border: 1px solid black;
+}
+
+#tableManNumb {
+	float: left;
+}
+
+#tableManChar {
+	padding-left: 25px;
+}
+
+#tableCompNumb {
+	float: left;
+}
+
+#tableCompChar {
+	padding-left: 25px;
+}
+
+#tableComp {
+	padding-top: 0px;
+	padding-right: 30px;
+	padding-bottom: 10px;
+	float: right;
+	#border: 1px solid black;
+}
+
+td {
+	background-size: contain;
+	border: solid white 1px;
+	height: 20px;
+	width: 20px;
+	text-align: right;
+	font-size: 10pt;
+}
+
+.tcellComp, .tcellMan {
+	border: solid black 1px;
+}
