@@ -28,7 +28,7 @@
 		// если мимо
 		if (a[i][j] == 0) {
 			a[i][j] = NOT_HIT;
-			td.css('background-image', 'url(1.gif)');
+            td.css('background-image', 'url(./images/hit.gif)');
 			return false;
 		}
 	
