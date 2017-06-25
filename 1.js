@@ -174,7 +174,7 @@
 		l = get.length;
 		x = get.indexOf('?');
 		get = get.substr(x + 5, l - x + 5);
-		if (get == '') get = "Человек";
+		if (get == '') get = "Player";
 		return get;
 }
 
@@ -465,8 +465,8 @@
 			shipCompLife = isShipsLife(compShips[0], n);
 		} else
 			if (shipManLife)
-				alert(s + " выиграл!");
+				alert(s + " won!");
 			else
-				alert("Компьютер выиграл!")
+				alert("Computer won!")
 	});
 });
